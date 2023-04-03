@@ -99,8 +99,9 @@ export default function Ccontent() {
   return (
     <Flex
       className="scrollbarnoneC"
-      flexDirection={"wrap"}
-      justifyContent={"center"}
+      // w={"100vw"}
+      // flexDirection={"wrap"}
+      // justifyContent={"center"}
       backgroundColor={"#1c1c1c"}
     >
       <Flex
@@ -108,16 +109,22 @@ export default function Ccontent() {
         flexDirection={"column"}
         bgColor={"#1c1c1c"}
         paddingTop={"50px"}
-        paddingRight={"20px"}
+        // paddingRight={"20px"}
         paddingBottom={"50px"}
-        paddingLeft={"200px"}
+        paddingLeft={"403px"}
+        maxW={"100vw"}
+        w="100%"
+        // maxW
         gap={"50px"}
-        overflowY={"scroll"}
         scrollBehavior={"smooth"}
       >
         <Flex flexDirection={"column"} gap={"10px"}>
           <Box bgColor="#1c1c1c">
-            <Flex flexDirection={"row"} justifyContent={"space-between"}>
+            <Flex
+              paddingX={"20px"}
+              flexDirection={"row"}
+              justifyContent={"space-between"}
+            >
               <h2>
                 <a
                   href=""
@@ -130,7 +137,7 @@ export default function Ccontent() {
                   Fokus
                 </a>
               </h2>
-              <a
+              <div
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -140,7 +147,7 @@ export default function Ccontent() {
                 href=""
               >
                 <span color="white">Tampilkan semua</span>
-              </a>
+              </div>
             </Flex>
           </Box>
           <Flex
