@@ -378,3 +378,7 @@
 }
 
 /* LOGIN */
+
+.ilogin:hover {
+	border: 3px solid #1bd760;
+}

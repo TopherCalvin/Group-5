@@ -6,16 +6,21 @@ import reportWebVitals from "./reportWebVitals";
 import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter } from "react-router-dom";
 import "./assets/fonts/CircularStd-Medium.otf";
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+import rootReducer from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const store = configureStore({ reducer: rootReducer });
 root.render(
 	// <React.StrictMode>
-
-	<ChakraProvider>
-		<BrowserRouter>
-			<App />
-		</BrowserRouter>
-	</ChakraProvider>
+	<Provider store={store}>
+		<ChakraProvider>
+			<BrowserRouter>
+				<App />
+			</BrowserRouter>
+		</ChakraProvider>
+	</Provider>
 	// </React.StrictMode>
 );
 

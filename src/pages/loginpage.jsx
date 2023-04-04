@@ -6,19 +6,50 @@ import {
 	Center,
 	Input,
 	Checkbox,
+	InputGroup,
+	InputRightElement,
 } from "@chakra-ui/react";
 import logo from "../assets/spotify-logo2.png";
 import { BsApple, BsFacebook } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
+import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { TbAlertCircleFilled } from "react-icons/tb";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
+	const [account, setAccount] = useState({ email: "", password: "" });
+	const [seePassword, setSeePassword] = useState(false);
+	const nav = useNavigate();
+
+	// useEffect() {
+	//     console.log("ada password diketik"), [account.password];
+	// }
+
+	function inputHandler(event) {
+		const { value, id } = event.target;
+		const tempAccount = { ...account };
+		tempAccount[id] = value;
+		setAccount(tempAccount);
+	}
+
+	function login() {
+		nav("/");
+	}
+
 	return (
-		<Center display={"flex"} flexDir={"column"}>
+		<Center
+			display={"flex"}
+			flexDir={"column"}
+			fontFamily={"CircularStd, sans-serif"}
+			fontSize={"14px"}
+			paddingX={"10px"}
+		>
 			<Center
 				paddingTop={"25px"}
 				paddingBottom={"25px"}
-				borderBottom={"1px solid grey"}
+				marginBottom={"10px"}
+				borderBottom={"1px solid #b3b3b3"}
 				w={"100%"}
 			>
 				<Image src={logo} h={"44px"}></Image>
@@ -32,6 +63,13 @@ export default function LoginPage() {
 					flexDirection={"column"}
 					gap={"10px"}
 				>
+					<Box
+						width={"450px"}
+						textAlign={"center"}
+						fontWeight={"bold"}
+					>
+						To continue, login to Spotify.
+					</Box>
 					<Center
 						w={"100%"}
 						bgColor={"#1A77F2"}
@@ -39,8 +77,10 @@ export default function LoginPage() {
 						fontWeight={"700"}
 						borderRadius={"25px"}
 						gap={"10px"}
-						border={"1px solid #A5A5A5"}
+						border={"0.5px solid black"}
 						color={"#e8e8e8"}
+						cursor={"pointer"}
+						letterSpacing={"0.1em"}
 					>
 						<Icon w={"20px"} h={"20px"} as={BsFacebook}></Icon>{" "}
 						CONTINUE WITH FACEBOOK
@@ -53,8 +93,10 @@ export default function LoginPage() {
 						fontWeight={"700"}
 						borderRadius={"25px"}
 						gap={"10px"}
-						border={"1px solid #A5A5A5"}
+						border={"0.5px solid black"}
 						color={"#e8e8e8"}
+						cursor={"pointer"}
+						letterSpacing={"0.1em"}
 					>
 						<Icon w={"20px"} h={"20px"} as={BsApple}></Icon>{" "}
 						CONTINUE WITH APPLE
@@ -67,8 +109,10 @@ export default function LoginPage() {
 						fontWeight={"700"}
 						borderRadius={"25px"}
 						gap={"10px"}
-						border={"1px solid #A5A5A5"}
+						border={"0.5px solid black"}
 						color={"#6A6A6A"}
+						cursor={"pointer"}
+						letterSpacing={"0.1em"}
 					>
 						<Icon w={"20px"} h={"20px"} as={FcGoogle}></Icon>{" "}
 						CONTINUE WITH GOOGLE
@@ -81,23 +125,38 @@ export default function LoginPage() {
 						fontWeight={"700"}
 						borderRadius={"25px"}
 						gap={"10px"}
-						border={"1px solid #A5A5A5"}
+						border={"0.5px solid black"}
 						color={"#6A6A6A"}
+						cursor={"pointer"}
+						letterSpacing={"0.1em"}
 					>
 						CONTINUE WITH PHONE NUMBER
 					</Center>
 				</Center>
 			</Center>
-			<Center w={"100%"} h={"48px"} color={"black"} gap={"10px"}>
-				<Center h={"100%"}>
-					<Box h={"2px"} w={"100%"} bgColor={"black"}></Box>
-				</Center>
-				OR
-				<Center h={"100%"}>
-					<Box h={"1px"} w={"100%"} bgColor={"grey"}></Box>
-				</Center>
-			</Center>
-			<Box width={"450px"} textAlign={"left"} paddingBottom={"5px"}>
+
+			<Flex w={"450px"} h={"38px"} marginTop={"25px"}>
+				<Box
+					w={"100%"}
+					borderTop={"1px solid #b3b3b3"}
+					marginTop={"4px"}
+				></Box>
+				<Box padding={"0 10px"} fontWeight={"bold"}>
+					OR
+				</Box>
+				<Box
+					w={"100%"}
+					borderTop={"1px solid #b3b3b3"}
+					marginTop={"4px"}
+				></Box>
+			</Flex>
+
+			<Box
+				width={"450px"}
+				textAlign={"left"}
+				paddingBottom={"5px"}
+				fontWeight={"bold"}
+			>
 				Email address or username
 			</Box>
 			<Input
@@ -108,32 +167,63 @@ export default function LoginPage() {
 				borderRadius={"5px"}
 				placeholder="Email address or username"
 				marginBottom={"10px"}
+				id="name"
+				onChange={inputHandler}
 			></Input>
 
 			<Box
 				width={"450px"}
 				textAlign={"left"}
 				paddingBottom={"5px"}
-				// paddingTop={"10px"}
+				fontWeight={"bold"}
 			>
 				Password
 			</Box>
-			<Input
+			<InputGroup
 				w={"450px"}
 				maxW={"450px"}
 				h={"48px"}
-				border={"1px solid black"}
-				borderRadius={"5px"}
-				placeholder="Password"
 				marginBottom={"10px"}
-			></Input>
+			>
+				<Input
+					w={"450px"}
+					maxW={"450px"}
+					h={"48px"}
+					border={"1px solid black"}
+					borderRadius={"5px"}
+					placeholder="Password"
+					marginBottom={"10px"}
+					type={!seePassword ? "password" : "text"}
+					id="password"
+					onChange={inputHandler}
+				/>
+				<InputRightElement h={"100%"}>
+					<Icon
+						w={"25px"}
+						h={"25px"}
+						color={"grey"}
+						as={!seePassword ? AiOutlineEyeInvisible : AiOutlineEye}
+						cursor={"pointer"}
+						onClick={() => setSeePassword(!seePassword)}
+					></Icon>
+				</InputRightElement>
+			</InputGroup>
+			{account?.password.length < 8 && account?.password.length > 3 ? (
+				<Box color={"red"}>
+					Password shall contain at least eight characters
+				</Box>
+			) : null}
 			<Box
 				width={"450px"}
 				textAlign={"left"}
+				paddingTop={"10px"}
 				paddingBottom={"5px"}
-				marginBottom={"10px"}
+				marginBottom={"20px"}
+				fontSize={"16px"}
+				textDecoration={"underline"}
+				color={"black"}
 			>
-				Forgot your password?
+				<a href="#"> Forgot your password?</a>
 			</Box>
 			<Box
 				display={"flex"}
@@ -141,7 +231,7 @@ export default function LoginPage() {
 				w={"450px"}
 				maxW={"450px"}
 			>
-				<Checkbox>Remember Me</Checkbox>
+				<Checkbox size={"sm"}>Remember Me</Checkbox>
 				<Box
 					w={"121px"}
 					maxW={"121px"}
@@ -152,10 +242,51 @@ export default function LoginPage() {
 					display={"flex"}
 					justifyContent={"center"}
 					alignItems={"center"}
+					cursor={"pointer"}
+					letterSpacing={"0.1em"}
+					fontWeight={"600"}
+					onClick={login}
+					className="ilogin"
 				>
-					LOGIN
+					LOG IN
 				</Box>
 			</Box>
+
+			<Flex w={"450px"} h={"18px"} marginTop={"25px"}>
+				<Box
+					w={"100%"}
+					borderTop={"1px solid #b3b3b3"}
+					marginTop={"4px"}
+				></Box>
+			</Flex>
+
+			<Center
+				w={"450px"}
+				bgColor={"white"}
+				h={"48px"}
+				fontSize={"17px"}
+				fontWeight={"700"}
+				color={"black"}
+				cursor={"pointer"}
+				letterSpacing={"0.1em"}
+			>
+				Don't have an account?
+			</Center>
+
+			<Center
+				w={"450px"}
+				bgColor={"white"}
+				h={"48px"}
+				fontWeight={"700"}
+				borderRadius={"25px"}
+				marginTop={"10px"}
+				border={"0.5px solid black"}
+				color={"#6A6A6A"}
+				cursor={"pointer"}
+				letterSpacing={"0.1em"}
+			>
+				SIGN UP FOR SPOTIFY
+			</Center>
 		</Center>
 	);
 }
