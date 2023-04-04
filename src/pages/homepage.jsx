@@ -5,12 +5,12 @@ import "../components/main.css";
 import Ccontent from "../components/main";
 
 export default function HomePage() {
-  return (
-    <>
-      <Sidebar />
-      {/* <Navbar /> */}
-      {/* <Ccontent /> */}
-      <Playbar />
-    </>
-  );
+	return (
+		<>
+			<Sidebar />
+			{/* <Navbar /> */}
+			{/* <Ccontent /> */}
+			<Playbar />
+		</>
+	);
 }
