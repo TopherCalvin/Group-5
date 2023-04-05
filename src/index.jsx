@@ -9,6 +9,7 @@ import "./assets/fonts/CircularStd-Medium.otf";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./redux/store";
+import AuthProvider from "./HOC/authprovider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const store = configureStore({ reducer: rootReducer });
@@ -17,7 +18,9 @@ root.render(
 	<Provider store={store}>
 		<ChakraProvider>
 			<BrowserRouter>
-				<App />
+				<AuthProvider>
+					<App />
+				</AuthProvider>
 			</BrowserRouter>
 		</ChakraProvider>
 	</Provider>

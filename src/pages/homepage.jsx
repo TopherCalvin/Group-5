@@ -5,17 +5,20 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Spinner, Center } from "@chakra-ui/react";
 
-export default function HomePage(props) {
+export default function HomePage() {
 	let nav = useNavigate();
 	const [loading, setLoading] = useState(true);
 
-	// DID MOUNT
+	// // DID MOUNT
 	useEffect(() => {
 		// FUNCTION WILL EXECUTE HERE
-		setTimeout(() => setLoading(false), 2000);
-		if (props.user != "john") {
-			nav("/login");
-		}
+		// const user = JSON.parse(localStorage.getItem("user"));
+		// console.log(user);
+		// if (!user?.email) {
+		// 	// console.log(user);
+		// 	return nav("/login");
+		// }
+		setTimeout(() => setLoading(false), 1000);
 	}, []);
 
 	return (

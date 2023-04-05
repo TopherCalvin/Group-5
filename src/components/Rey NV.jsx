@@ -5,10 +5,20 @@ import { AiFillCaretDown } from "react-icons/ai";
 import { AiOutlineLeft } from "react-icons/ai";
 import { AiOutlineRight } from "react-icons/ai";
 import foto from "./foto.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { auth_types } from "../redux/types";
 
 export default function Navbar() {
 	const userSelector = useSelector((state) => state.auth);
+	const nav = useNavigate();
+	const dispatch = useDispatch();
+
+	function Logout() {
+		dispatch({ type: auth_types.logout });
+		localStorage.removeItem("user");
+		nav("/login");
+	}
 
 	return (
 		<>
@@ -57,7 +67,11 @@ export default function Navbar() {
 						<Box className="tulisan">{userSelector?.email}</Box>
 					</Center>
 					<Center>
-						<Icon as={AiFillCaretDown} />
+						<Icon
+							as={AiFillCaretDown}
+							onClick={Logout}
+							cursor={"pointer"}
+						/>
 					</Center>
 				</Flex>
 			</Box>

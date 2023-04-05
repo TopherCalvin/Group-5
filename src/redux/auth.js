@@ -1,3 +1,5 @@
+import { auth_types } from "./types";
+
 const init = {
 	email: "John Doe",
 	password: "",
@@ -5,7 +7,7 @@ const init = {
 
 function userReducer(state = init, action) {
 	//ACTION ADALAH EVENT YANG TERJADI
-	if (action.type == "login") {
+	if (action.type == auth_types.login) {
 		return {
 			...state,
 			email: action.payload.email,
@@ -14,7 +16,6 @@ function userReducer(state = init, action) {
 	} else {
 		return init;
 	}
-	return state;
 }
 
 export default userReducer;

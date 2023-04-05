@@ -16,15 +16,22 @@ import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { TbAlertCircleFilled } from "react-icons/tb";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { auth_types } from "../redux/types";
 
 export default function LoginPage() {
 	const [account, setAccount] = useState({ email: "", password: "" });
 	const [seePassword, setSeePassword] = useState(false);
 	const nav = useNavigate();
+	const dispatch = useDispatch();
 
-	// useEffect() {
-	//     console.log("ada password diketik"), [account.password];
-	// }
+	// useEffect(() => {
+	// 	// FUNCTION WILL EXECUTE HERE
+	// 	const user = JSON.parse(localStorage.getItem("user"));
+	// 	if (user?.email) {
+	// 		nav("/");
+	// 	}
+	// }, []);
 
 	function inputHandler(event) {
 		const { value, id } = event.target;
@@ -34,6 +41,11 @@ export default function LoginPage() {
 	}
 
 	function login() {
+		dispatch({
+			type: auth_types.login,
+			payload: account,
+		});
+		localStorage.setItem("user", JSON.stringify(account));
 		nav("/");
 	}
 
@@ -167,7 +179,7 @@ export default function LoginPage() {
 				borderRadius={"5px"}
 				placeholder="Email address or username"
 				marginBottom={"10px"}
-				id="name"
+				id="email"
 				onChange={inputHandler}
 			></Input>
 
