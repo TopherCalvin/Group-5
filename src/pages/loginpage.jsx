@@ -15,7 +15,7 @@ import { FcGoogle } from "react-icons/fc";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { TbAlertCircleFilled } from "react-icons/tb";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { auth_types } from "../redux/types";
 
@@ -279,7 +279,6 @@ export default function LoginPage() {
 				fontSize={"17px"}
 				fontWeight={"700"}
 				color={"black"}
-				cursor={"pointer"}
 				letterSpacing={"0.1em"}
 			>
 				Don't have an account?
@@ -297,7 +296,7 @@ export default function LoginPage() {
 				cursor={"pointer"}
 				letterSpacing={"0.1em"}
 			>
-				SIGN UP FOR SPOTIFY
+				<Link to={"/register"}> SIGN UP FOR SPOTIFY</Link>
 			</Center>
 		</Center>
 	);
