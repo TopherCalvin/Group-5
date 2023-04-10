@@ -18,6 +18,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { auth_types } from "../redux/types";
+import axios from "axios";
 
 export default function LoginPage() {
 	const [account, setAccount] = useState({ email: "", password: "" });
@@ -40,14 +41,37 @@ export default function LoginPage() {
 		setAccount(tempAccount);
 	}
 
-	function login() {
-		dispatch({
-			type: auth_types.login,
-			payload: account,
-		});
-		localStorage.setItem("user", JSON.stringify(account));
-		nav("/");
+	// LOGIN WITH AXIOS
+	async function login() {
+		await axios
+			.get("http://localhost:2000/user", {
+				params: {
+					email: account.email.toLowerCase(),
+					password: account.password,
+				},
+			})
+			.then((res) => {
+				if (res.data.length) {
+					dispatch({
+						type: auth_types.login,
+						payload: account,
+					});
+					localStorage.setItem("user", JSON.stringify(account));
+					nav("/");
+				} else {
+					alert("Email/Pass salah.");
+				}
+			});
 	}
+
+	// function login() {
+	// 	dispatch({
+	// 		type: auth_types.login,
+	// 		payload: account,
+	// 	});
+	// 	localStorage.setItem("user", JSON.stringify(account));
+	// 	nav("/");
+	// }
 
 	return (
 		<Center
