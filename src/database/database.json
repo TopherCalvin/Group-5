@@ -71,6 +71,13 @@
       "password": 770,
       "birthdate": "2019-08-28",
       "gender": "male"
+    },
+    {
+      "email": "jon@mail.com",
+      "name": "Lorem",
+      "password": "dljsnfdskjfbds#",
+      "birthdate": "1990-01-11T17:00:00.000Z",
+      "id": 9
     }
   ]
 }

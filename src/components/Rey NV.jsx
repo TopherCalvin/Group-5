@@ -64,7 +64,7 @@ export default function Navbar() {
 						</Avatar>
 					</Center>
 					<Center>
-						<Box className="tulisan">{userSelector?.email}</Box>
+						<Box className="tulisan">{userSelector?.name}</Box>
 					</Center>
 					<Center>
 						<Icon

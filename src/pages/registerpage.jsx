@@ -8,7 +8,6 @@ import {
 	Checkbox,
 	InputGroup,
 	InputRightElement,
-	Wrap,
 	Select,
 } from "@chakra-ui/react";
 import logo from "../assets/spotify-logo2.png";
@@ -24,6 +23,7 @@ import { Radio, RadioGroup, Stack } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import YupPassword from "yup-password";
+import axios from "axios";
 
 export default function RegisterPage() {
 	const [account, setAccount] = useState({ email: "", password: "" });
@@ -68,21 +68,45 @@ export default function RegisterPage() {
 					[Yup.ref("email"), null],
 					"The email addresses don't match."
 				),
-			password: Yup.string()
-				.min(8, "Your password is too short.")
-				.minLowercase(1, "Need Lower Case"),
+			password: Yup.string().min(8, "Your password is too short."),
 			name: Yup.string().required("Enter a name for your profile."),
 			day: Yup.number("Enter a valid day of the month")
 				.moreThan(0, "Enter a valid day of the month")
 				.lessThan(32, "Enter a valid day of the month"),
-			month: Yup.string().required("Select your birth month."),
+			// month: Yup.string().required("Select your birth month."),
 			year: Yup.number()
 				.required("Enter a valid year")
 				.moreThan(1930, "Enter a valid year"),
-			onsubmit: () => {
-				console.log(formik.values);
-			},
 		}),
+		onSubmit: async () => {
+			const { email, name, password, year, month, day } = formik.values;
+			const account = { email, name, password };
+			account.birthdate = new Date(year, month, day);
+			const checkEmail = await axios
+				.get("http://localhost:2000/user", {
+					params: { email: account.email },
+				})
+				.then((res) => {
+					if (res.data.length) {
+						return true;
+					} else {
+						return false;
+					}
+				});
+			console.log(formik.values);
+			console.log(formik.values.email);
+			console.log("Hello world");
+
+			if (checkEmail) {
+				alert("Email has been used");
+			} else {
+				await axios
+					.post("http://localhost:2000/user", account)
+					.then((res) => {
+						nav("/login");
+					});
+			}
+		},
 	});
 
 	// useEffect(() => {
@@ -123,18 +147,11 @@ export default function RegisterPage() {
 			paddingX={"24px"}
 			marginBottom={"20vh"}
 		>
-			<Center
-				paddingTop={"40px"}
-				paddingBottom={"25px"}
-				// marginBottom={"10px"}
-				// borderBottom={"1px solid #b3b3b3"}
-				w={"100%"}
-			>
+			<Center paddingTop={"40px"} paddingBottom={"25px"} w={"100%"}>
 				<Image src={logo} h={"27px"}></Image>
 			</Center>
 			<Center>
 				<Center
-					// paddingTop={"25px"}
 					w={"450px"}
 					maxW={"450px"}
 					display={"flex"}
@@ -231,21 +248,20 @@ export default function RegisterPage() {
 				id="email"
 				borderColor={formik.errors.email ? "red" : "grey"}
 				onChange={inputHandler}
-				// onChange={(e) => formik.setFieldValue("email", e.target.value)}
 			></Input>
-			{account?.password.length < 1 ? (
-				<Flex
-					color={"#D31125"}
-					gap={"6px"}
-					flexDirection={"row"}
-					w={"450px"}
-					alignItems={"center"}
-					display={formik.errors.email ? "Flex" : "none"}
-				>
-					<Icon as={TbAlertCircleFilled} w={"19px"} h={"19px"}></Icon>
-					{formik.errors.email}
-				</Flex>
-			) : null}
+
+			<Flex
+				color={"#D31125"}
+				gap={"6px"}
+				flexDirection={"row"}
+				w={"450px"}
+				alignItems={"center"}
+				display={formik.errors.email ? "Flex" : "none"}
+			>
+				<Icon as={TbAlertCircleFilled} w={"19px"} h={"19px"}></Icon>
+				{formik.errors.email}
+			</Flex>
+
 			<Box textAlign={"left"} width={"450px"} textDecor={"underline"}>
 				<a href="#" className="isplink">
 					Use phone number instead
@@ -271,18 +287,18 @@ export default function RegisterPage() {
 				id="email2"
 				onChange={inputHandler}
 			></Input>
-			{account?.password.length < 1 ? (
-				<Flex
-					color={"#D31125"}
-					gap={"6px"}
-					flexDirection={"row"}
-					w={"450px"}
-					alignItems={"center"}
-				>
-					<Icon as={TbAlertCircleFilled} w={"19px"} h={"19px"}></Icon>
-					You need to confirm your email.
-				</Flex>
-			) : null}
+			<Flex
+				color={"#D31125"}
+				gap={"6px"}
+				flexDirection={"row"}
+				w={"450px"}
+				alignItems={"center"}
+				display={formik.errors.email2 ? "Flex" : "none"}
+			>
+				<Icon as={TbAlertCircleFilled} w={"19px"} h={"19px"}></Icon>
+				{formik.errors.email2}
+			</Flex>
+
 			<Box
 				width={"450px"}
 				textAlign={"left"}
@@ -321,18 +337,18 @@ export default function RegisterPage() {
 					></Icon>
 				</InputRightElement>
 			</InputGroup>
-			{account?.password.length < 1 ? (
-				<Flex
-					color={"#D31125"}
-					gap={"6px"}
-					flexDirection={"row"}
-					w={"450px"}
-					alignItems={"center"}
-				>
-					<Icon as={TbAlertCircleFilled} w={"19px"} h={"19px"}></Icon>
-					{formik.errors.password}
-				</Flex>
-			) : null}
+
+			<Flex
+				color={"#D31125"}
+				gap={"6px"}
+				flexDirection={"row"}
+				w={"450px"}
+				alignItems={"center"}
+				display={formik.errors.password ? "Flex" : "none"}
+			>
+				<Icon as={TbAlertCircleFilled} w={"19px"} h={"19px"}></Icon>
+				{formik.errors.password}
+			</Flex>
 
 			<Box
 				width={"450px"}
@@ -354,22 +370,18 @@ export default function RegisterPage() {
 				id="name"
 				onChange={inputHandler}
 			></Input>
-			{account?.password.length < 1 ? (
-				<Flex
-					color={"#D31125"}
-					gap={"6px"}
-					flexDirection={"row"}
-					w={"450px"}
-					alignItems={"center"}
-				>
-					<Icon as={TbAlertCircleFilled} w={"19px"} h={"19px"}></Icon>
-					Enter a name for your profile.
-				</Flex>
-			) : (
-				<Box textAlign={"left"} width={"450px"}>
-					This appears on your profile
-				</Box>
-			)}
+
+			<Flex
+				color={"#D31125"}
+				gap={"6px"}
+				flexDirection={"row"}
+				w={"450px"}
+				alignItems={"center"}
+				display={formik.errors.name ? "Flex" : "none"}
+			>
+				<Icon as={TbAlertCircleFilled} w={"19px"} h={"19px"}></Icon>
+				{formik.errors.name}
+			</Flex>
 
 			<Box
 				width={"450px"}
@@ -431,44 +443,42 @@ export default function RegisterPage() {
 				</label>
 			</Flex>
 
-			{account?.password.length < 1 ? (
-				<Flex
-					color={"#D31125"}
-					gap={"6px"}
-					flexDirection={"row"}
-					w={"450px"}
-					alignItems={"center"}
-				>
-					<Icon as={TbAlertCircleFilled} w={"19px"} h={"19px"}></Icon>
-					Enter a valid day of the month.
-				</Flex>
-			) : null}
+			<Flex
+				color={"#D31125"}
+				gap={"6px"}
+				flexDirection={"row"}
+				w={"450px"}
+				alignItems={"center"}
+				display={formik.errors.day ? "Flex" : "none"}
+			>
+				<Icon as={TbAlertCircleFilled} w={"19px"} h={"19px"}></Icon>
+				{formik.errors.day}
+			</Flex>
 
-			{account?.password.length < 1 ? (
-				<Flex
-					color={"#D31125"}
-					gap={"6px"}
-					flexDirection={"row"}
-					w={"450px"}
-					alignItems={"center"}
-				>
-					<Icon as={TbAlertCircleFilled} w={"19px"} h={"19px"}></Icon>
-					Select your birth month.
-				</Flex>
-			) : null}
+			<Flex
+				color={"#D31125"}
+				gap={"6px"}
+				flexDirection={"row"}
+				w={"450px"}
+				alignItems={"center"}
+				display={formik.errors.month ? "Flex" : "none"}
+			>
+				<Icon as={TbAlertCircleFilled} w={"19px"} h={"19px"}></Icon>
+				{formik.errors.month}
+			</Flex>
 
-			{account?.password.length < 1 ? (
-				<Flex
-					color={"#D31125"}
-					gap={"6px"}
-					flexDirection={"row"}
-					w={"450px"}
-					alignItems={"center"}
-				>
-					<Icon as={TbAlertCircleFilled} w={"19px"} h={"19px"}></Icon>
-					Enter a valid year.
-				</Flex>
-			) : null}
+			<Flex
+				color={"#D31125"}
+				gap={"6px"}
+				flexDirection={"row"}
+				w={"450px"}
+				alignItems={"center"}
+				display={formik.errors.year ? "Flex" : "none"}
+			>
+				<Icon as={TbAlertCircleFilled} w={"19px"} h={"19px"}></Icon>
+				{formik.errors.year}
+			</Flex>
+
 			<Box
 				width={"450px"}
 				textAlign={"left"}
@@ -639,7 +649,7 @@ export default function RegisterPage() {
 				fontSize={"16px"}
 				fontWeight={"bold"}
 				marginBottom={"25px"}
-				// onClick={inputHandler}
+				onClick={formik.handleSubmit}
 			>
 				Sign up
 			</Box>
