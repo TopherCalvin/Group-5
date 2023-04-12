@@ -73,7 +73,7 @@ export default function RegisterPage() {
 			day: Yup.number("Enter a valid day of the month")
 				.moreThan(0, "Enter a valid day of the month")
 				.lessThan(32, "Enter a valid day of the month"),
-			// month: Yup.string().required("Select your birth month."),
+			month: Yup.number().required("Select your birth month."),
 			year: Yup.number()
 				.required("Enter a valid year")
 				.moreThan(1930, "Enter a valid year"),

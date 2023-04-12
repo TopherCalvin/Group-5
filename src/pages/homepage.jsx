@@ -4,10 +4,26 @@ import "../components/main.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Spinner, Center } from "@chakra-ui/react";
+import axios from "axios";
 
 export default function HomePage() {
 	let nav = useNavigate();
 	const [loading, setLoading] = useState(true);
+	const [playlist, setPlaylist] = useState([]);
+	const [homeplaylist, SetHomePlaylist] = useState();
+
+	async function fetchData() {
+		await axios.get("http://localhost:2000/musics/").then((res) => {
+			return setPlaylist(res.data);
+		});
+		await axios.get("http://localhost:2000/playlist").then((res) => {
+			SetHomePlaylist(res.data);
+		});
+	}
+
+	useEffect(() => {
+		fetchData();
+	}, []);
 
 	// // DID MOUNT
 	useEffect(() => {
@@ -18,7 +34,9 @@ export default function HomePage() {
 		// 	// console.log(user);
 		// 	return nav("/login");
 		// }
-		setTimeout(() => setLoading(false), 1000);
+		fetchData();
+
+		setTimeout(() => setLoading(false), 3000);
 	}, []);
 
 	return (
@@ -35,8 +53,8 @@ export default function HomePage() {
 				</Center>
 			) : (
 				<>
-					<Sidebar />
-					<Playbar />
+					<Sidebar data={homeplaylist} setPlaylist={setPlaylist} />
+					<Playbar key={"test"} playlist={playlist} />
 				</>
 			)}
 		</>

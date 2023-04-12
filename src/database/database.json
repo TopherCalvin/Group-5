@@ -1,83 +1,140 @@
 {
-  "user": [
-    {
-      "id": 0,
-      "name": "John",
-      "email": "john@mail.com",
-      "password": 123,
-      "birthdate": "2004-10-22",
-      "gender": "male"
-    },
-    {
-      "id": 1,
-      "name": "Watson Shaffer",
-      "email": "watsonshaffer@sulfax.com",
-      "password": 191,
-      "birthdate": "2005-12-04",
-      "gender": "male"
-    },
-    {
-      "id": 2,
-      "name": "Erickson Riley",
-      "email": "ericksonriley@sulfax.com",
-      "password": 924,
-      "birthdate": "2011-02-24",
-      "gender": "male"
-    },
-    {
-      "id": 3,
-      "name": "York Wilkerson",
-      "email": "yorkwilkerson@sulfax.com",
-      "password": 332,
-      "birthdate": "2003-02-16",
-      "gender": "male"
-    },
-    {
-      "id": 4,
-      "name": "Christian Washington",
-      "email": "christianwashington@sulfax.com",
-      "password": 619,
-      "birthdate": "2012-01-09",
-      "gender": "female"
-    },
-    {
-      "id": 5,
-      "name": "Puckett Hall",
-      "email": "pucketthall@sulfax.com",
-      "password": 476,
-      "birthdate": "2020-04-04",
-      "gender": "male"
-    },
-    {
-      "id": 6,
-      "name": "Dale Myers",
-      "email": "dalemyers@sulfax.com",
-      "password": 150,
-      "birthdate": "2008-06-28",
-      "gender": "male"
-    },
-    {
-      "id": 7,
-      "name": "Mamie Oconnor",
-      "email": "mamieoconnor@sulfax.com",
-      "password": 555,
-      "birthdate": "2009-07-22",
-      "gender": "female"
-    },
-    {
-      "id": 8,
-      "name": "Udin Sedunia",
-      "email": "udin@sulfax.com",
-      "password": 770,
-      "birthdate": "2019-08-28",
-      "gender": "male"
-    },
-    {
-      "email": "jon@mail.com",
-      "name": "Lorem",
-      "password": "dljsnfdskjfbds#",
-      "birthdate": "1990-01-11T17:00:00.000Z",
-      "id": 9
-    }
-  ]
+	"user": [
+		{
+			"id": 0,
+			"name": "John",
+			"email": "john@mail.com",
+			"password": 123,
+			"birthdate": "2004-10-22",
+			"gender": "male"
+		},
+		{
+			"id": 1,
+			"name": "Watson Shaffer",
+			"email": "watsonshaffer@sulfax.com",
+			"password": 191,
+			"birthdate": "2005-12-04",
+			"gender": "male"
+		},
+		{
+			"id": 2,
+			"name": "Erickson Riley",
+			"email": "ericksonriley@sulfax.com",
+			"password": 924,
+			"birthdate": "2011-02-24",
+			"gender": "male"
+		},
+		{
+			"id": 3,
+			"name": "York Wilkerson",
+			"email": "yorkwilkerson@sulfax.com",
+			"password": 332,
+			"birthdate": "2003-02-16",
+			"gender": "male"
+		},
+		{
+			"id": 4,
+			"name": "Christian Washington",
+			"email": "christianwashington@sulfax.com",
+			"password": 619,
+			"birthdate": "2012-01-09",
+			"gender": "female"
+		},
+		{
+			"id": 5,
+			"name": "Puckett Hall",
+			"email": "pucketthall@sulfax.com",
+			"password": 476,
+			"birthdate": "2020-04-04",
+			"gender": "male"
+		},
+		{
+			"id": 6,
+			"name": "Dale Myers",
+			"email": "dalemyers@sulfax.com",
+			"password": 150,
+			"birthdate": "2008-06-28",
+			"gender": "male"
+		},
+		{
+			"id": 7,
+			"name": "Mamie Oconnor",
+			"email": "mamieoconnor@sulfax.com",
+			"password": 555,
+			"birthdate": "2009-07-22",
+			"gender": "female"
+		},
+		{
+			"id": 8,
+			"name": "Udin Sedunia",
+			"email": "udin@sulfax.com",
+			"password": 770,
+			"birthdate": "2019-08-28",
+			"gender": "male"
+		},
+		{
+			"email": "jon@mail.com",
+			"name": "Lorem",
+			"password": "dljsnfdskjfbds#",
+			"birthdate": "1990-01-11T17:00:00.000Z",
+			"id": 9
+		}
+	],
+	"expense": [
+		{
+			"id": 0,
+			"judul": "judux",
+			"tanggal": "tanggax",
+			"kategori": "kategorx"
+		}
+	],
+	"musics": [
+		{
+			"id": 1,
+			"title": "Spaceman",
+			"singer": "Nick Jonas",
+			"src": "Spaceman.mp3",
+			"cover": "https://i.ibb.co/XL0t12v/album1.jpg"
+		},
+		{
+			"id": 2,
+			"title": "This Is Heaven",
+			"singer": "Nick Jonas",
+			"src": "This Is Heaven.mp3",
+			"cover": "https://i.ibb.co/XL0t12v/album1.jpg"
+		}
+	],
+	"playlist": [
+		{
+			"id": 1,
+			"type": "",
+			"createdBy": "spotify",
+			"imgURL": "https://dailymix-images.scdn.co/v2/img/ab6761610000e5eb016288add2edec88ecd87e83/1/en/default",
+			"playlist": "Daily Mix 1",
+			"desc": "Sammy Simorangkir, Juicy Luicy, Mahalini and more",
+			"songlist": [
+				{
+					"id": 1,
+					"title": "Spaceman",
+					"singer": "Nick Jonas",
+					"src": "Spaceman.mp3",
+					"cover": "https://i.ibb.co/XL0t12v/album1.jpg"
+				},
+				{
+					"id": 2,
+					"title": "This Is Heaven",
+					"singer": "Nick Jonas",
+					"src": "This Is Heaven.mp3",
+					"cover": "https://i.ibb.co/XL0t12v/album1.jpg"
+				},
+				{
+					"id": 3,
+					"title": "Baby (feat. Marina & Luis Fonsi)",
+					"singer": "Marina & Louis Fonsi",
+					"src": "Baby (feat. Marina & Luis Fonsi).mp3",
+					"cover": "https://dailymix-images.scdn.co/v2/img/ab6761610000e5eb016288add2edec88ecd87e83/1/en/default"
+				}
+			]
+		}
+	]
 }
